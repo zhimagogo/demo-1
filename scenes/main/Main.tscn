@@ -1,0 +1,645 @@
+[gd_scene load_steps=39 format=3]
+
+; ============================ 外部资源：脚本 ============================
+[ext_resource type="Script" path="res://scripts/main/Main.gd" id="Main_gd"]
+[ext_resource type="Script" path="res://scripts/systems/PostFx.gd" id="PostFx_gd"]
+[ext_resource type="Script" path="res://scripts/systems/GridSystem.gd" id="GridSystem_gd"]
+[ext_resource type="Script" path="res://scripts/systems/CitySystem.gd" id="CitySystem_gd"]
+[ext_resource type="Script" path="res://scripts/systems/BuildSystem.gd" id="BuildSystem_gd"]
+[ext_resource type="Script" path="res://scripts/components/BuildingModelRig.gd" id="BuildingModelRig_gd"]
+[ext_resource type="Script" path="res://scripts/components/HealthComponent.gd" id="HealthComponent_gd"]
+[ext_resource type="Script" path="res://scripts/entities/ResourceNode.gd" id="ResourceNode_gd"]
+[ext_resource type="Script" path="res://scripts/systems/PawnSpawner.gd" id="PawnSpawner_gd"]
+[ext_resource type="Script" path="res://scripts/systems/SelectionController.gd" id="SelectionController_gd"]
+[ext_resource type="Script" path="res://scripts/systems/WildlifeSpawner.gd" id="WildlifeSpawner_gd"]
+[ext_resource type="Script" path="res://scripts/systems/CombatSystem.gd" id="CombatSystem_gd"]
+[ext_resource type="Script" path="res://scripts/systems/SettlementSystem.gd" id="SettlementSystem_gd"]
+[ext_resource type="Script" path="res://scripts/systems/DragonSystem.gd" id="DragonSystem_gd"]
+[ext_resource type="Script" path="res://scripts/systems/NavSystem.gd" id="NavSystem_gd"]
+[ext_resource type="Script" path="res://scripts/systems/IsometricCamera.gd" id="IsometricCamera_gd"]
+[ext_resource type="Script" path="res://scripts/systems/ThirdPersonCamera.gd" id="ThirdPersonCamera_gd"]
+[ext_resource type="Script" path="res://scripts/systems/HeroController.gd" id="HeroController_gd"]
+[ext_resource type="Script" path="res://scripts/decor/DecorationScatter.gd" id="DecorationScatter_gd"]
+
+[ext_resource type="Script" path="res://scripts/decor/WorldScenery.gd" id="WorldScenery_gd"]
+
+[ext_resource type="Script" path="res://scripts/systems/DayNightCycle.gd" id="DayNightCycle_gd"]
+
+[ext_resource type="Script" path="res://scripts/systems/WeatherSystem.gd" id="WeatherSystem_gd"]
+
+[ext_resource type="Script" path="res://scripts/systems/ResourceGrowthSystem.gd" id="ResourceGrowthSystem_gd"]
+
+[ext_resource type="Script" path="res://scripts/systems/QuestSystem.gd" id="QuestSystem_gd"]
+
+[ext_resource type="Script" path="res://scripts/systems/TutorialSystem.gd" id="TutorialSystem_gd"]
+
+; ============================ 外部资源：shader ============================
+[ext_resource type="Shader" path="res://assets/shaders/ground.gdshader" id="ground_shader"]
+[ext_resource type="Shader" path="res://assets/shaders/water_ground.gdshader" id="water_shader"]
+
+; ============================ 子资源：天空 / 环境（美化版） ============================
+; 枚举值（Godot 4.7）：background_mode BG_SKY=2；tonemap_mode AgX=4；
+; ambient_light_source AMBIENT_SOURCE_SKY=3；glow_blend_mode SCREEN=1。
+[sub_resource type="ProceduralSkyMaterial" id="sky_mat"]
+sky_top_color = Color(0.40, 0.54, 0.66, 1)
+sky_horizon_color = Color(0.70, 0.76, 0.83, 1)
+ground_bottom_color = Color(0.15, 0.14, 0.13, 1)
+ground_horizon_color = Color(0.42, 0.40, 0.36, 1)
+sky_curve = 0.12
+sky_energy_multiplier = 0.9
+ground_curve = 0.05
+ground_energy_multiplier = 0.8
+sun_angle_max = 12.0
+sun_curve = 0.1
+use_debanding = true
+
+[sub_resource type="Sky" id="sky_main"]
+sky_material = SubResource("sky_mat")
+
+[sub_resource type="Environment" id="env_main"]
+background_mode = 2
+sky = SubResource("sky_main")
+; v47 光影基线：AgX（高光滚降自然、避免 ACES 的荧光绿过饱和）+ 冷暗部/暖高光的分级。
+; 昼夜动态部分（环境光 / 雾色 / 辉光 / 体积雾）由 DayNightCycle 每 0.1s 覆写，
+; 这里只保留不随时刻变化的「画质基线」。
+tonemap_mode = 4
+tonemap_exposure = 0.97
+tonemap_white = 6.0
+tonemap_agx_white = 6.0
+tonemap_agx_contrast = 1.3
+ambient_light_source = 3
+ambient_light_color = Color(0.5, 0.56, 0.66, 1)
+ambient_light_energy = 0.55
+fog_enabled = true
+fog_light_color = Color(0.66, 0.73, 0.83, 1)
+fog_light_energy = 0.32
+fog_density = 0.0012
+fog_aerial_perspective = 0.45
+fog_sky_affect = 0.22
+fog_height = 3.5
+fog_height_density = 0.004
+volumetric_fog_enabled = false
+volumetric_fog_density = 0.004
+volumetric_fog_albedo = Color(0.78, 0.83, 0.92, 1)
+volumetric_fog_anisotropy = 0.18
+volumetric_fog_length = 56.0
+volumetric_fog_detail_spread = 1.4
+volumetric_fog_ambient_inject = 0.12
+volumetric_fog_gi_inject = 0.25
+glow_enabled = true
+glow_normalized = false
+glow_intensity = 0.26
+glow_strength = 0.92
+glow_bloom = 0.12
+glow_mix = 0.5
+glow_blend_mode = 1
+glow_hdr_threshold = 1.0
+ssao_enabled = true
+ssao_radius = 1.5
+ssao_intensity = 1.15
+ssao_power = 1.9
+ssao_detail = 0.6
+ssao_horizon = 0.06
+ssao_sharpness = 0.98
+ssao_light_affect = 0.35
+ssil_enabled = false
+ssil_radius = 3.0
+ssil_intensity = 0.9
+ssil_sharpness = 0.95
+ssil_normal_rejection = 0.9
+adjustment_enabled = true
+adjustment_brightness = 1.0
+adjustment_contrast = 1.05
+adjustment_saturation = 1.06
+
+; ============================ 子资源：地面 shader 材质 ============================
+[sub_resource type="ShaderMaterial" id="mat_ground"]
+shader = ExtResource("ground_shader")
+shader_parameter/albedo_grass_a = Color(0.22, 0.34, 0.105, 1)
+shader_parameter/albedo_grass_b = Color(0.33, 0.45, 0.16, 1)
+shader_parameter/albedo_dirt = Color(0.67, 0.57, 0.39, 1)
+
+[sub_resource type="PlaneMesh" id="mesh_ground"]
+size = Vector2(560, 560)
+
+; ============================ 子资源：水面 shader 材质 ============================
+; 湖泊水面（region=1）。河道 / 水潭 / 瀑布由 WorldScenery 程序化生成各自的独立材质，
+; 全部读 WorldLayout 的同一套水系几何（见 scripts/defs/WorldLayout.gd）。
+[sub_resource type="ShaderMaterial" id="mat_water"]
+shader = ExtResource("water_shader")
+shader_parameter/water_deep = Color(0.10, 0.39, 0.43, 1)
+shader_parameter/water_shallow = Color(0.40, 0.66, 0.59, 1)
+shader_parameter/flow_speed = 0.45
+shader_parameter/ws_region_cut = 1.0
+
+; v43：湖泊东迁到 (52,-38)、半径 34×24m（LAKE_RADII 17×12），52×52 平面覆盖全湖并留出
+; 岸线余量；河道自身网格由 WaterFeature 沿 WorldLayout.RIVER_PTS 程序化生成，末段落在湖内，
+; 靠 ws_region_cut 与湖水融合。
+[sub_resource type="PlaneMesh" id="mesh_water"]
+size = Vector2(52, 52)
+
+; ============================ 子资源：主城占位圆柱 ============================
+[sub_resource type="StandardMaterial3D" id="mat_cyl"]
+albedo_color = Color(0.95, 0.8, 0.25, 1)
+emission_enabled = true
+emission = Color(0.95, 0.62, 0.12, 1)
+emission_energy_multiplier = 0.6
+roughness = 0.6
+
+[sub_resource type="CylinderMesh" id="mesh_cyl"]
+top_radius = 4.0
+bottom_radius = 4.0
+height = 2.0
+
+[sub_resource type="CylinderShape3D" id="shape_cyl"]
+height = 2.0
+radius = 4.0
+
+[sub_resource type="BoxShape3D" id="shape_ground_box"]
+size = Vector3(256, 1, 256)
+
+; ============================ 节点树 ============================
+[node name="Main" type="Node"]
+script = ExtResource("Main_gd")
+
+[node name="WorldRoot" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="WorldRoot"]
+environment = SubResource("env_main")
+
+[node name="Sun" type="DirectionalLight3D" parent="WorldRoot"]
+rotation_degrees = Vector3(-45, -35, 5)
+light_color = Color(1, 0.96, 0.88, 1)
+light_energy = 1.9
+light_angular_distance = 0.65
+light_volumetric_fog_energy = 1.6
+shadow_enabled = true
+shadow_bias = 0.03
+shadow_normal_bias = 1.2
+directional_shadow_mode = 1
+directional_shadow_max_distance = 118.0
+directional_shadow_split_1 = 0.16
+directional_shadow_split_2 = 0.46
+directional_shadow_split_3 = 0.2
+directional_shadow_blend_splits = true
+directional_shadow_fade_start = 0.8
+directional_shadow_pancake_size = 20.0
+
+[node name="FillLight" type="DirectionalLight3D" parent="WorldRoot"]
+rotation_degrees = Vector3(35, 150, 0)
+light_color = Color(0.62, 0.72, 0.95, 1)
+light_energy = 0.16
+light_angular_distance = 0.5
+shadow_enabled = false
+
+[node name="GroundPlane" type="StaticBody3D" parent="WorldRoot"]
+collision_layer = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldRoot/GroundPlane"]
+mesh = SubResource("mesh_ground")
+material_override = SubResource("mat_ground")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldRoot/GroundPlane"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("shape_ground_box")
+
+[node name="GridSystem" type="Node3D" parent="WorldRoot"]
+script = ExtResource("GridSystem_gd")
+cell_size = 2.0
+grid_size = Vector2i(128, 128)
+debug_visible = false
+
+[node name="CitySystem" type="Node3D" parent="WorldRoot"]
+script = ExtResource("CitySystem_gd")
+city_half = 26.0
+border_color = Color(0.73, 0.80, 0.58, 0.38)
+
+[node name="BuildSystem" type="Node3D" parent="WorldRoot"]
+script = ExtResource("BuildSystem_gd")
+
+[node name="BaseCore" type="StaticBody3D" parent="WorldRoot" groups=["base_core", "player_unit"]]
+collision_layer = 1
+
+[node name="PlaceholderMesh" type="MeshInstance3D" parent="WorldRoot/BaseCore"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("mesh_cyl")
+material_override = SubResource("mat_cyl")
+
+[node name="ModelRig" type="Node3D" parent="WorldRoot/BaseCore"]
+script = ExtResource("BuildingModelRig_gd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldRoot/BaseCore"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("shape_cyl")
+
+[node name="HealthComponent" type="Node" parent="WorldRoot/BaseCore"]
+script = ExtResource("HealthComponent_gd")
+max_hp = 1000.0
+
+[node name="ResourceNodes" type="Node3D" parent="WorldRoot"]
+
+[node name="Resource_01" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 0, -24)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"wood"
+total_reserve = 50
+mesh_color = Color(0.2, 0.55, 0.2, 1)
+mesh_size = Vector3(0.8, 2.2, 0.8)
+
+[node name="Resource_02" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -28)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"stone"
+total_reserve = 50
+mesh_color = Color(0.55, 0.55, 0.58, 1)
+mesh_size = Vector3(1, 1, 1)
+
+[node name="Resource_03" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, -18)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"wood"
+total_reserve = 50
+mesh_color = Color(0.2, 0.55, 0.2, 1)
+mesh_size = Vector3(0.8, 2.2, 0.8)
+
+[node name="Resource_04" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -29)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"stone"
+total_reserve = 50
+mesh_color = Color(0.55, 0.55, 0.58, 1)
+mesh_size = Vector3(1, 1, 1)
+
+[node name="Resource_05" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -44)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"wood"
+total_reserve = 50
+mesh_color = Color(0.2, 0.55, 0.2, 1)
+mesh_size = Vector3(0.8, 2.2, 0.8)
+
+[node name="Resource_06" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -28)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"stone"
+total_reserve = 50
+mesh_color = Color(0.55, 0.55, 0.58, 1)
+mesh_size = Vector3(1, 1, 1)
+
+[node name="Resource_07" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 0, -10)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"wood"
+total_reserve = 50
+mesh_color = Color(0.2, 0.55, 0.2, 1)
+mesh_size = Vector3(0.8, 2.2, 0.8)
+
+[node name="Resource_08" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -29)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"stone"
+total_reserve = 50
+mesh_color = Color(0.55, 0.55, 0.58, 1)
+mesh_size = Vector3(1, 1, 1)
+
+[node name="Resource_09" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, 29)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"wood"
+total_reserve = 50
+mesh_color = Color(0.2, 0.55, 0.2, 1)
+mesh_size = Vector3(0.8, 2.2, 0.8)
+
+[node name="Resource_10" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 28)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"stone"
+total_reserve = 50
+mesh_color = Color(0.55, 0.55, 0.58, 1)
+mesh_size = Vector3(1, 1, 1)
+
+[node name="Resource_11" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, 18)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"wood"
+total_reserve = 50
+mesh_color = Color(0.2, 0.55, 0.2, 1)
+mesh_size = Vector3(0.8, 2.2, 0.8)
+
+[node name="Resource_12" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 29)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"stone"
+total_reserve = 50
+mesh_color = Color(0.55, 0.55, 0.58, 1)
+mesh_size = Vector3(1, 1, 1)
+
+[node name="Resource_13" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 0, 24)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"wood"
+total_reserve = 50
+mesh_color = Color(0.2, 0.55, 0.2, 1)
+mesh_size = Vector3(0.8, 2.2, 0.8)
+
+[node name="Resource_14" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 28)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"stone"
+total_reserve = 50
+mesh_color = Color(0.55, 0.55, 0.58, 1)
+mesh_size = Vector3(1, 1, 1)
+
+[node name="Resource_15" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, 18)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"wood"
+total_reserve = 50
+mesh_color = Color(0.2, 0.55, 0.2, 1)
+mesh_size = Vector3(0.8, 2.2, 0.8)
+
+[node name="Resource_16" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 29)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"stone"
+total_reserve = 50
+mesh_color = Color(0.55, 0.55, 0.58, 1)
+mesh_size = Vector3(1, 1, 1)
+
+[node name="Resource_17" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, -6)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"wood"
+total_reserve = 50
+mesh_color = Color(0.2, 0.55, 0.2, 1)
+mesh_size = Vector3(0.8, 2.2, 0.8)
+
+[node name="Resource_18" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, 6)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"stone"
+total_reserve = 50
+mesh_color = Color(0.55, 0.55, 0.58, 1)
+mesh_size = Vector3(1, 1, 1)
+
+[node name="Resource_19" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+position = Vector3(-46, 0, -22)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"wood"
+total_reserve = 50
+mesh_size = Vector3(0.8, 2.2, 0.8)
+
+[node name="Resource_20" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+position = Vector3(-51, 0, -31)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"stone"
+total_reserve = 50
+mesh_size = Vector3(1, 1, 1)
+
+[node name="Resource_21" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+position = Vector3(-28, 0, -44)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"wood"
+total_reserve = 50
+mesh_size = Vector3(0.8, 2.2, 0.8)
+
+[node name="Resource_22" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+position = Vector3(-36, 0, -52)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"wood"
+total_reserve = 50
+mesh_size = Vector3(0.8, 2.2, 0.8)
+
+[node name="Resource_23" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+position = Vector3(-55, 0, 8)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"stone"
+total_reserve = 50
+mesh_size = Vector3(1, 1, 1)
+
+[node name="Resource_24" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+position = Vector3(-46, 0, 19)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"wood"
+total_reserve = 50
+mesh_size = Vector3(0.8, 2.2, 0.8)
+
+[node name="Resource_25" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+position = Vector3(-42, 0, 36)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"wood"
+total_reserve = 50
+mesh_size = Vector3(0.8, 2.2, 0.8)
+
+[node name="Resource_26" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+position = Vector3(-26, 0, 48)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"stone"
+total_reserve = 50
+mesh_size = Vector3(1, 1, 1)
+
+[node name="Resource_27" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+position = Vector3(-13, 0, 48)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"wood"
+total_reserve = 50
+mesh_size = Vector3(0.8, 2.2, 0.8)
+
+[node name="Resource_28" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+position = Vector3(14, 0, 47)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"wood"
+total_reserve = 50
+mesh_size = Vector3(0.8, 2.2, 0.8)
+
+[node name="Resource_29" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+position = Vector3(31, 0, 43)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"stone"
+total_reserve = 50
+mesh_size = Vector3(1, 1, 1)
+
+[node name="Resource_30" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+position = Vector3(45, 0, 36)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"wood"
+total_reserve = 50
+mesh_size = Vector3(0.8, 2.2, 0.8)
+
+[node name="Resource_31" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+position = Vector3(48, 0, 22)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"wood"
+total_reserve = 50
+mesh_size = Vector3(0.8, 2.2, 0.8)
+
+[node name="Resource_32" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+position = Vector3(41, 0, 16)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"stone"
+total_reserve = 50
+mesh_size = Vector3(1, 1, 1)
+
+[node name="Resource_33" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+position = Vector3(51, 0, -6)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"wood"
+total_reserve = 50
+mesh_size = Vector3(0.8, 2.2, 0.8)
+
+[node name="Resource_34" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+position = Vector3(34, 0, -15)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"wood"
+total_reserve = 50
+mesh_size = Vector3(0.8, 2.2, 0.8)
+
+[node name="Resource_35" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+position = Vector3(35, 0, -49)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"stone"
+total_reserve = 50
+mesh_size = Vector3(1, 1, 1)
+
+[node name="Resource_36" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+position = Vector3(14, 0, -48)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"wood"
+total_reserve = 50
+mesh_size = Vector3(0.8, 2.2, 0.8)
+
+[node name="Resource_37" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+position = Vector3(5, 0, -30)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"wood"
+total_reserve = 50
+mesh_size = Vector3(0.8, 2.2, 0.8)
+
+[node name="Resource_38" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+position = Vector3(-8, 0, 29)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"stone"
+total_reserve = 50
+mesh_size = Vector3(1, 1, 1)
+
+[node name="Resource_39" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+position = Vector3(29, 0, 12)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"wood"
+total_reserve = 50
+mesh_size = Vector3(0.8, 2.2, 0.8)
+
+[node name="Resource_40" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+position = Vector3(-29, 0, -12)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"wood"
+total_reserve = 50
+mesh_size = Vector3(0.8, 2.2, 0.8)
+
+[node name="Resource_41" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+position = Vector3(-33, 0, 27)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"stone"
+total_reserve = 50
+mesh_size = Vector3(1, 1, 1)
+
+[node name="Resource_42" type="StaticBody3D" parent="WorldRoot/ResourceNodes"]
+position = Vector3(30, 0, 30)
+script = ExtResource("ResourceNode_gd")
+yield_resource = &"wood"
+total_reserve = 50
+mesh_size = Vector3(0.8, 2.2, 0.8)
+
+[node name="Buildings" type="Node3D" parent="WorldRoot"]
+
+[node name="Pawns" type="Node3D" parent="WorldRoot"]
+
+[node name="Enemies" type="Node3D" parent="WorldRoot"]
+
+[node name="LootDrops" type="Node3D" parent="WorldRoot" groups=["loot_drops"]]
+
+[node name="Projectiles" type="Node3D" parent="WorldRoot" groups=["projectiles"]]
+
+[node name="Decorations" type="Node3D" parent="WorldRoot"]
+
+[node name="DecorationScatter" type="Node3D" parent="WorldRoot/Decorations"]
+script = ExtResource("DecorationScatter_gd")
+tree_count = 520
+rock_count = 300
+grass_count = 320000
+waterplant_count = 160
+flower_count = 1300
+seed_value = 1337
+map_half = 126.0
+city_half = 26.0
+
+[node name="Water" type="MeshInstance3D" parent="WorldRoot" groups=["water_feature"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52, 0.06, -38)
+mesh = SubResource("mesh_water")
+material_override = SubResource("mat_water")
+
+[node name="WorldScenery" type="Node3D" parent="WorldRoot"]
+script = ExtResource("WorldScenery_gd")
+
+[node name="DayNightCycle" type="Node" parent="WorldRoot"]
+script = ExtResource("DayNightCycle_gd")
+
+[node name="WeatherSystem" type="Node" parent="WorldRoot"]
+script = ExtResource("WeatherSystem_gd")
+
+[node name="PawnSpawner" type="Node" parent="WorldRoot"]
+script = ExtResource("PawnSpawner_gd")
+
+[node name="SelectionController" type="Node" parent="WorldRoot"]
+script = ExtResource("SelectionController_gd")
+
+[node name="WildlifeSpawner" type="Node3D" parent="WorldRoot"]
+script = ExtResource("WildlifeSpawner_gd")
+spawn_min_r = 40.0
+spawn_max_r = 116.0
+
+[node name="CombatSystem" type="Node" parent="WorldRoot"]
+script = ExtResource("CombatSystem_gd")
+
+[node name="SettlementSystem" type="Node" parent="WorldRoot"]
+script = ExtResource("SettlementSystem_gd")
+
+[node name="DragonSystem" type="Node" parent="WorldRoot"]
+script = ExtResource("DragonSystem_gd")
+
+[node name="ResourceGrowthSystem" type="Node" parent="WorldRoot"]
+script = ExtResource("ResourceGrowthSystem_gd")
+
+[node name="QuestSystem" type="Node" parent="WorldRoot"]
+script = ExtResource("QuestSystem_gd")
+
+[node name="TutorialSystem" type="Node" parent="WorldRoot"]
+script = ExtResource("TutorialSystem_gd")
+
+[node name="NavSystem" type="Node" parent="WorldRoot"]
+script = ExtResource("NavSystem_gd")
+
+[node name="IsometricCamera" type="Camera3D" parent="WorldRoot"]
+script = ExtResource("IsometricCamera_gd")
+pan_speed = 30.0
+edge_pan = true
+edge_margin = 20
+bounds = AABB(-122, 0, -122, 244, 60, 244)
+zoom_step = 4.0
+zoom_smoothing = 9.0
+min_distance = 12.0
+max_distance = 100.0
+rotate_steps = 4
+current = true
+
+[node name="ThirdPersonCamera" type="Camera3D" parent="WorldRoot"]
+transform = Transform3D(1, 0, 0, 0, 0.96, 0.28, 0, -0.28, 0.96, 0, 1.55, 4.6)
+script = ExtResource("ThirdPersonCamera_gd")
+
+[node name="HeroController" type="Node" parent="WorldRoot"]
+script = ExtResource("HeroController_gd")
+
+; v47：画质后处理层（CanvasLayer 0 = 3D 之后、HUD(1) 之前；不拦截输入）。
+[node name="PostFx" type="CanvasLayer" parent="."]
+layer = 0
+script = ExtResource("PostFx_gd")

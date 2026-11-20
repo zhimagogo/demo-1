@@ -1,0 +1,428 @@
+{
+  "note": "由 tools/fetch_icons.py 生成；id 即文件名，运行时见 scripts/ui/IconDB.gd",
+  "license": "CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/)",
+  "source": "https://game-icons.net",
+  "repository": "https://github.com/game-icons/icons",
+  "icons": {
+    "res_wood": {
+      "id": "res_wood",
+      "source": "game-icons.net",
+      "path": "delapouite/log.svg",
+      "author": "delapouite",
+      "url": "https://game-icons.net/1x1/delapouite/log.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/log.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/res_wood.png"
+    },
+    "res_stone": {
+      "id": "res_stone",
+      "source": "game-icons.net",
+      "path": "delapouite/stone-pile.svg",
+      "author": "delapouite",
+      "url": "https://game-icons.net/1x1/delapouite/stone-pile.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/stone-pile.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/res_stone.png"
+    },
+    "res_food": {
+      "id": "res_food",
+      "source": "game-icons.net",
+      "path": "lorc/wheat.svg",
+      "author": "lorc",
+      "url": "https://game-icons.net/1x1/lorc/wheat.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/lorc/wheat.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/res_food.png"
+    },
+    "res_gold": {
+      "id": "res_gold",
+      "source": "game-icons.net",
+      "path": "delapouite/coins.svg",
+      "author": "delapouite",
+      "url": "https://game-icons.net/1x1/delapouite/coins.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/coins.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/res_gold.png"
+    },
+    "building_wall": {
+      "id": "building_wall",
+      "source": "game-icons.net",
+      "path": "delapouite/stone-wall.svg",
+      "author": "delapouite",
+      "url": "https://game-icons.net/1x1/delapouite/stone-wall.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/stone-wall.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/building_wall.png"
+    },
+    "building_house": {
+      "id": "building_house",
+      "source": "game-icons.net",
+      "path": "delapouite/house.svg",
+      "author": "delapouite",
+      "url": "https://game-icons.net/1x1/delapouite/house.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/house.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/building_house.png"
+    },
+    "stat_pop": {
+      "id": "stat_pop",
+      "source": "game-icons.net",
+      "path": "delapouite/person.svg",
+      "author": "delapouite",
+      "url": "https://game-icons.net/1x1/delapouite/person.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/person.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/stat_pop.png"
+    },
+    "stat_soldier": {
+      "id": "stat_soldier",
+      "source": "game-icons.net",
+      "path": "lorc/visored-helm.svg",
+      "author": "lorc",
+      "url": "https://game-icons.net/1x1/lorc/visored-helm.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/lorc/visored-helm.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/stat_soldier.png"
+    },
+    "stat_hero": {
+      "id": "stat_hero",
+      "source": "game-icons.net",
+      "path": "delapouite/knight-banner.svg",
+      "author": "delapouite",
+      "url": "https://game-icons.net/1x1/delapouite/knight-banner.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/knight-banner.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/stat_hero.png"
+    },
+    "stat_enemy": {
+      "id": "stat_enemy",
+      "source": "game-icons.net",
+      "path": "lorc/wolf-head.svg",
+      "author": "lorc",
+      "url": "https://game-icons.net/1x1/lorc/wolf-head.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/lorc/wolf-head.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/stat_enemy.png"
+    },
+    "time_day": {
+      "id": "time_day",
+      "source": "game-icons.net",
+      "path": "delapouite/sunrise.svg",
+      "author": "delapouite",
+      "url": "https://game-icons.net/1x1/delapouite/sunrise.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/sunrise.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/time_day.png"
+    },
+    "time_night": {
+      "id": "time_night",
+      "source": "game-icons.net",
+      "path": "lorc/moon.svg",
+      "author": "lorc",
+      "url": "https://game-icons.net/1x1/lorc/moon.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/lorc/moon.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/time_night.png"
+    },
+    "weather_clear": {
+      "id": "weather_clear",
+      "source": "game-icons.net",
+      "path": "lorc/sunbeams.svg",
+      "author": "lorc",
+      "url": "https://game-icons.net/1x1/lorc/sunbeams.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/lorc/sunbeams.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/weather_clear.png"
+    },
+    "weather_cloud": {
+      "id": "weather_cloud",
+      "source": "game-icons.net",
+      "path": "lorc/fluffy-cloud.svg",
+      "author": "lorc",
+      "url": "https://game-icons.net/1x1/lorc/fluffy-cloud.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/lorc/fluffy-cloud.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/weather_cloud.png"
+    },
+    "weather_rain": {
+      "id": "weather_rain",
+      "source": "game-icons.net",
+      "path": "lorc/heavy-rain.svg",
+      "author": "lorc",
+      "url": "https://game-icons.net/1x1/lorc/heavy-rain.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/lorc/heavy-rain.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/weather_rain.png"
+    },
+    "weather_storm": {
+      "id": "weather_storm",
+      "source": "game-icons.net",
+      "path": "lorc/lightning-storm.svg",
+      "author": "lorc",
+      "url": "https://game-icons.net/1x1/lorc/lightning-storm.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/lorc/lightning-storm.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/weather_storm.png"
+    },
+    "unit_melee": {
+      "id": "unit_melee",
+      "source": "game-icons.net",
+      "path": "lorc/crossed-swords.svg",
+      "author": "lorc",
+      "url": "https://game-icons.net/1x1/lorc/crossed-swords.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/lorc/crossed-swords.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/unit_melee.png"
+    },
+    "unit_ranged": {
+      "id": "unit_ranged",
+      "source": "game-icons.net",
+      "path": "delapouite/bow-arrow.svg",
+      "author": "delapouite",
+      "url": "https://game-icons.net/1x1/delapouite/bow-arrow.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/bow-arrow.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/unit_ranged.png"
+    },
+    "skill_slash": {
+      "id": "skill_slash",
+      "source": "game-icons.net",
+      "path": "lorc/broadsword.svg",
+      "author": "lorc",
+      "url": "https://game-icons.net/1x1/lorc/broadsword.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/lorc/broadsword.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/skill_slash.png"
+    },
+    "skill_flame": {
+      "id": "skill_flame",
+      "source": "game-icons.net",
+      "path": "sbed/fire.svg",
+      "author": "sbed",
+      "url": "https://game-icons.net/1x1/sbed/fire.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/sbed/fire.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/skill_flame.png"
+    },
+    "quest": {
+      "id": "quest",
+      "source": "game-icons.net",
+      "path": "lorc/scroll-unfurled.svg",
+      "author": "lorc",
+      "url": "https://game-icons.net/1x1/lorc/scroll-unfurled.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/lorc/scroll-unfurled.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/quest.png"
+    },
+    "event_log": {
+      "id": "event_log",
+      "source": "game-icons.net",
+      "path": "lorc/tied-scroll.svg",
+      "author": "lorc",
+      "url": "https://game-icons.net/1x1/lorc/tied-scroll.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/lorc/tied-scroll.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/event_log.png"
+    },
+    "tutorial": {
+      "id": "tutorial",
+      "source": "game-icons.net",
+      "path": "lorc/open-book.svg",
+      "author": "lorc",
+      "url": "https://game-icons.net/1x1/lorc/open-book.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/lorc/open-book.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/tutorial.png"
+    },
+    "boss": {
+      "id": "boss",
+      "source": "game-icons.net",
+      "path": "lorc/daemon-skull.svg",
+      "author": "lorc",
+      "url": "https://game-icons.net/1x1/lorc/daemon-skull.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/lorc/daemon-skull.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/boss.png"
+    },
+    "hp": {
+      "id": "hp",
+      "source": "game-icons.net",
+      "path": "skoll/hearts.svg",
+      "author": "skoll",
+      "url": "https://game-icons.net/1x1/skoll/hearts.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/skoll/hearts.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/hp.png"
+    },
+    "xp": {
+      "id": "xp",
+      "source": "game-icons.net",
+      "path": "lorc/medal.svg",
+      "author": "lorc",
+      "url": "https://game-icons.net/1x1/lorc/medal.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/lorc/medal.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/xp.png"
+    },
+    "map": {
+      "id": "map",
+      "source": "game-icons.net",
+      "path": "lorc/treasure-map.svg",
+      "author": "lorc",
+      "url": "https://game-icons.net/1x1/lorc/treasure-map.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/lorc/treasure-map.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/map.png"
+    },
+    "compass": {
+      "id": "compass",
+      "source": "game-icons.net",
+      "path": "lorc/compass.svg",
+      "author": "lorc",
+      "url": "https://game-icons.net/1x1/lorc/compass.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/lorc/compass.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/compass.png"
+    },
+    "warning": {
+      "id": "warning",
+      "source": "game-icons.net",
+      "path": "lorc/hazard-sign.svg",
+      "author": "lorc",
+      "url": "https://game-icons.net/1x1/lorc/hazard-sign.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/lorc/hazard-sign.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/warning.png"
+    },
+    "close": {
+      "id": "close",
+      "source": "game-icons.net",
+      "path": "sbed/cancel.svg",
+      "author": "sbed",
+      "url": "https://game-icons.net/1x1/sbed/cancel.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/sbed/cancel.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/close.png"
+    },
+    "help": {
+      "id": "help",
+      "source": "game-icons.net",
+      "path": "sbed/help.svg",
+      "author": "sbed",
+      "url": "https://game-icons.net/1x1/sbed/help.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/sbed/help.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/help.png"
+    },
+    "pause": {
+      "id": "pause",
+      "source": "game-icons.net",
+      "path": "guard13007/pause-button.svg",
+      "author": "guard13007",
+      "url": "https://game-icons.net/1x1/guard13007/pause-button.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/guard13007/pause-button.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/pause.png"
+    },
+    "play": {
+      "id": "play",
+      "source": "game-icons.net",
+      "path": "guard13007/play-button.svg",
+      "author": "guard13007",
+      "url": "https://game-icons.net/1x1/guard13007/play-button.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/guard13007/play-button.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/play.png"
+    },
+    "fast_forward": {
+      "id": "fast_forward",
+      "source": "game-icons.net",
+      "path": "delapouite/fast-forward-button.svg",
+      "author": "delapouite",
+      "url": "https://game-icons.net/1x1/delapouite/fast-forward-button.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/fast-forward-button.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/fast_forward.png"
+    },
+    "home": {
+      "id": "home",
+      "source": "game-icons.net",
+      "path": "delapouite/family-house.svg",
+      "author": "delapouite",
+      "url": "https://game-icons.net/1x1/delapouite/family-house.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/family-house.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/home.png"
+    },
+    "tool_hammer": {
+      "id": "tool_hammer",
+      "source": "game-icons.net",
+      "path": "delapouite/warhammer.svg",
+      "author": "delapouite",
+      "url": "https://game-icons.net/1x1/delapouite/warhammer.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/warhammer.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/tool_hammer.png"
+    },
+    "target": {
+      "id": "target",
+      "source": "game-icons.net",
+      "path": "delapouite/crosshair.svg",
+      "author": "delapouite",
+      "url": "https://game-icons.net/1x1/delapouite/crosshair.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/delapouite/crosshair.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/target.png"
+    },
+    "attack": {
+      "id": "attack",
+      "source": "game-icons.net",
+      "path": "lorc/crossed-slashes.svg",
+      "author": "lorc",
+      "url": "https://game-icons.net/1x1/lorc/crossed-slashes.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/lorc/crossed-slashes.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/attack.png"
+    },
+    "carry": {
+      "id": "carry",
+      "source": "game-icons.net",
+      "path": "lorc/knapsack.svg",
+      "author": "lorc",
+      "url": "https://game-icons.net/1x1/lorc/knapsack.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/lorc/knapsack.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/carry.png"
+    },
+    "shield": {
+      "id": "shield",
+      "source": "game-icons.net",
+      "path": "sbed/shield.svg",
+      "author": "sbed",
+      "url": "https://game-icons.net/1x1/sbed/shield.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/sbed/shield.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/shield.png"
+    },
+    "crown": {
+      "id": "crown",
+      "source": "game-icons.net",
+      "path": "lorc/crown.svg",
+      "author": "lorc",
+      "url": "https://game-icons.net/1x1/lorc/crown.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/lorc/crown.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/crown.png"
+    },
+    "building_tavern": {
+      "id": "building_tavern",
+      "source": "game-icons.net",
+      "path": "lorc/glass-shot.svg",
+      "author": "lorc",
+      "url": "https://game-icons.net/1x1/lorc/glass-shot.html",
+      "raw": "https://raw.githubusercontent.com/game-icons/icons/master/lorc/glass-shot.svg",
+      "license": "CC BY 3.0",
+      "png": "res://assets/ui/icons/building_tavern.png"
+    }
+  }
+}

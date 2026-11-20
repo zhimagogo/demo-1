@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://tests/DissolveZoneTest.gd" id="dissolve_zone_test_gd"]
+
+[node name="DissolveZoneTest" type="Node"]
+script = ExtResource("dissolve_zone_test_gd")

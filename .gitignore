@@ -1,0 +1,16 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# 导出产物（Windows 体验包等，体积大不入库）
+build/
+
+# 开发过程截图 / 录屏 / 验收产物（数百 MB，不入库）
+artifacts/
+
+# 运行时日志与 MCP 本地状态
+logs/
+.godot-mcp/
+
+# macOS 系统文件
+.DS_Store
