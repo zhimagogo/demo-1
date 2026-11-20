@@ -70,3 +70,9 @@ bash tools/run_all_tests.sh --full   # 追加 6 套（天气 / 小地图 / 像�
 - [dragon-assets/lowpoly-cc0.md](dragon-assets/lowpoly-cc0.md)
 
 二次分发前请保留上述说明。
+
+## 许可证
+
+本项目**代码**以 [MIT License](LICENSE) 发布——可自由使用、修改、分发、商用，保留版权声明即可。
+
+**第三方素材**（模型 / 贴图 / 字体 / 音频）不适用 MIT，各自沿用原授权：Kenney 与 KayKit 素材为 **CC0 1.0**，霞鹜文楷为 **SIL OFL 1.1**，详见上方 CREDITS 文件。二次分发时请保留这些说明。
